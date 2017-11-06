@@ -1,0 +1,12 @@
+{
+    "vim.hlsearch": true,
+    "vim.enableNeovim": true,
+    "vim.disableAnnoyingNeovimMessage": true,
+
+    "go.buildOnSave": "off",
+    "go.formatTool": "goimports",
+    "go.useCodeSnippetsOnFunctionSuggest": true,
+    "go.autocompleteUnimportedPackages": true,
+    "go.inferGopath": true,
+    "window.zoomLevel": 0
+}
