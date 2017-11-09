@@ -14,4 +14,108 @@
 		"description": "Log output to console"
 	}
 */
+	"Interface with default impl": {
+		"prefix": "iface",
+		"body": [
+			"type I${1} interface {",
+			"	$2",
+			"	$3",
+			"	$4",
+			"}",
+			"",
+			"type ${1} struct {",
+			"	$0",
+			"}",
+			"",
+			"func New${1}() *${1} {",
+			"	instance := &${1}{}",
+			"	return instance",
+			"}",
+			"",
+			"func (this *${1}) $2 {",
+			"}",
+			"",
+			"func (this *${1}) $3 {",
+			"}",
+			"",
+			"func (this *${1}) $4 {",
+			"}",
+			""
+		],
+		"description": ""
+	},
+	"Actor": {
+		"prefix": "actor",
+		"body": [
+			"type $1 struct {",
+			"	mQuit	chan bool",
+			"	mTicker *time.Ticker",
+			"}",
+			"",
+			"func New$1(interval time.Duration) *$1 {",
+			"	instance := &$1{",
+			"		mTicker: time.NewTicker(interval),",
+			"	}",
+			"	return instance",
+			"}",
+			"",
+			"func (this *$1) Startup() error {",
+			"	go this.loop()",
+			"	this.mQuit = make(chan bool)",
+			"	return nil",
+			"}",
+			"",
+			"func (this *$1) Shutdown() {",
+			"	if this.mQuit != nil {",
+			"		close(this.mQuit)",
+			"		this.mQuit = nil",
+			"	}",
+			"}",
+			"",
+			"func (this *$1) loop() {",
+			"	for {",
+			"		select {",
+			"			case <-this.mQuit:",
+			"				return",
+			"			case <-this.mTicker.C:",
+			"				this.main()",
+			"		}",
+			"	}",
+			"}",
+			"",
+			"func (this *$1) main() {",
+			"	$0",
+			"}",
+			""
+		],
+		"description": ""
+	},
+	"Deepcopy": {
+		"prefix": "deepcopy",
+		"body": [
+			"func DeepCopy(dst, src interface{}) error {",
+			"	var buf bytes.Buffer",
+			"	enc := gob.NewEncoder(&buf)",
+			"	dec := gob.NewDecoder(&buf)",
+			"	if err := enc.Encode(src); err != nil {",
+			"		return errors.Annotate(err, \"gob.Encode\")",
+			"	}"
+			"	return dec.Decode(dst)",
+			"}"
+		],
+		"description": ""
+	},
+	"CriticalSection": {
+		"prefix": "cs",
+		"body": [
+			"func CriticalSection(locker sync.Locker, snippet func()) {",
+			"	locker.Lock()",
+			"	defer locker.Unlock()",
+			"	snippet()",
+			"}",
+		],
+		"description": ""
+	},
+	"Dummy end": {
+	}
 }
