@@ -116,6 +116,34 @@
 		],
 		"description": ""
 	},
+	"Test Suite": {
+		"prefix": "suite",
+		"body": [
+			"type $1 struct {",
+			"	suite.Suite",
+			"}",
+			"",
+			"func (suite *$1) SetupSuite() {",
+			"}",
+			"",
+			"func (suite *$1) TearDownSuite() {",
+			"}",
+			"",
+			"func (suite *$1) SetupTest() {",
+			"}",
+			"",
+			"func (suite *$1) TearDownTest() {",
+			"}",
+			"",
+			"func Test$1(t *testing.T) {",
+			"	suite.Run(t, new($1))",
+			"}",
+			"",
+			"func (suite *$1) Test$2() {",
+			"}",
+		],
+		"description": "",
+	},
 	"Dummy end": {
 	}
 }

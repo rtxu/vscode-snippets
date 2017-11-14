@@ -8,5 +8,6 @@
     "go.useCodeSnippetsOnFunctionSuggest": true,
     "go.autocompleteUnimportedPackages": true,
     "go.inferGopath": true,
+
     "window.zoomLevel": 0
 }
